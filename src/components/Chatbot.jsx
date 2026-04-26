@@ -68,8 +68,8 @@ export default function Chatbot({ theme }) {
     setIsLoading(true)
 
     try {
-      // const response = await fetch('https://portfolio-rag-two.vercel.app/api/ask', {
-      const response = await fetch('http://localhost:3000/api/ask', {
+      const response = await fetch('https://portfolio-rag-two.vercel.app/api/ask', {
+      // const response = await fetch('http://localhost:3000/api/ask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
