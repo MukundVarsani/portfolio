@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MessageSquare, X, Send, Bot, User } from 'lucide-react'
+import ChatResponseRenderer from './ChatResponseRenderer'
 
 export default function Chatbot({ theme }) {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState([
-    { role: 'bot', text: 'Hi! I am here to answer any questions about my experience, skills, or projects!' }
+    { role: 'bot', data: { type: 'text', content: 'Hi! I\'m here to answer any questions about my experience, skills, or projects! 👋' }, isNew: false }
   ])
   
   const [input, setInput] = useState('')
@@ -43,7 +44,19 @@ export default function Chatbot({ theme }) {
 
   useEffect(() => {
     scrollToBottom()
-  }, [messages, isLoading])
+  }, [messages.length, isLoading])
+
+  // Clear isNew flags after animation completes
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setMessages(prev => {
+        const hasNew = prev.some(m => m.isNew)
+        if (!hasNew) return prev
+        return prev.map(m => m.isNew ? { ...m, isNew: false } : m)
+      })
+    }, 2000)
+    return () => clearTimeout(timer)
+  }, [messages.length])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -55,7 +68,8 @@ export default function Chatbot({ theme }) {
     setIsLoading(true)
 
     try {
-      const response = await fetch('https://portfolio-rag-two.vercel.app/api/ask', {
+      // const response = await fetch('https://portfolio-rag-two.vercel.app/api/ask', {
+      const response = await fetch('http://localhost:3000/api/ask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,10 +83,22 @@ export default function Chatbot({ theme }) {
         throw new Error(data.error || 'Failed to answer the question.')
       }
 
-      setMessages(prev => [...prev, { role: 'bot', text: data.answer }])
+      // Parse the structured JSON response from the RAG agent
+      let parsed = null
+      try {
+        const rawAnswer = data.answer
+        // The LLM may wrap in ```json ... ``` or return plain JSON
+        const cleaned = rawAnswer.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/i, '').trim()
+        parsed = JSON.parse(cleaned)
+      } catch {
+        // Fallback: treat as plain text
+        parsed = { type: 'text', content: data.answer }
+      }
+
+      setMessages(prev => [...prev, { role: 'bot', data: parsed, isNew: true }])
     } catch (error) {
       console.error('Chat API Error:', error)
-      setMessages(prev => [...prev, { role: 'bot', text: `Sorry, I encountered an error: ${error.message}` }])
+      setMessages(prev => [...prev, { role: 'bot', data: { type: 'text', content: `Sorry, I encountered an error: ${error.message}` }, isNew: true }])
     } finally {
       setIsLoading(false)
     }
@@ -122,7 +148,7 @@ export default function Chatbot({ theme }) {
               position: 'fixed',
               bottom: '2rem',
               right: '2rem',
-              width: 'min(calc(100vw - 4rem), 400px)',
+              width: 'min(calc(100vw - 2rem), 440px)',
               height: '600px',
               maxHeight: 'calc(100vh - 4rem)',
               borderRadius: '16px',
@@ -185,7 +211,7 @@ export default function Chatbot({ theme }) {
                     alignItems: 'flex-start',
                     gap: '0.75rem',
                     flexDirection: msg.role === 'user' ? 'row-reverse' : 'row',
-                    maxWidth: '85%',
+                    maxWidth: msg.role === 'bot' && msg.data?.type !== 'text' ? '95%' : '85%',
                   }}>
                     {msg.role === 'user' ? (
                       <div style={{
@@ -208,8 +234,13 @@ export default function Chatbot({ theme }) {
                       fontSize: '0.9rem',
                       lineHeight: 1.5,
                       border: msg.role === 'bot' ? '1px solid var(--border)' : 'none',
+                      maxWidth: msg.role === 'bot' && msg.data?.type !== 'text' ? '100%' : undefined,
+                      width: msg.role === 'bot' && msg.data?.type !== 'text' ? '100%' : undefined,
                     }}>
-                      {msg.text}
+                      {msg.role === 'bot' && msg.data
+                        ? <ChatResponseRenderer data={msg.data} isNew={msg.isNew} />
+                        : msg.text
+                      }
                     </div>
                   </div>
                 </div>

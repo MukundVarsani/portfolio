@@ -321,3 +321,15 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; letter-spacing: -0.02em; }
   transform: translate(-50%, -50%);
   transition: left 0.15s ease, top 0.15s ease;
 }
+
+/* ── Chat Response Cards ──────────────────────────────── */
+.chat-card-hover:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 0 12px var(--glow);
+}
+
+/* ── Typewriter cursor blink ─────────────────────────── */
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
