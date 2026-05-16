@@ -155,6 +155,29 @@ export const projects = [
     },
   },
   {
+    name: "Don't just watch, Feel it",
+    shortName: "Android Haptic",
+    type: "personal",
+    tag: "Personal Project",
+    tech: [
+      "Flutter",
+      "Dart",
+      "Android Native APIs",
+      "Haptic Feedback"
+    ],
+    platform: ["Android", "iOS"],
+    description:
+      "A self-learning mobile application created to experiment with advanced haptic feedback patterns, vibration intensity, and tactile interactions using Flutter and native platform APIs.",
+    highlight:
+      "Explored platform-specific haptic behaviors, custom vibration patterns, and real-device testing to understand how modern apps create immersive touch feedback experiences.",
+    links: {
+      apk: "https://drive.google.com/file/d/1MTxDQMZizXW24a6_jXzVi1DaqrNr2_iI/view?usp=sharing",
+      appStore: "",
+      github: "",
+      live: ""
+    },
+  },
+  {
     name: "Future Capsule",
     shortName: "Time Capsule App",
     type: "personal",
@@ -164,7 +187,7 @@ export const projects = [
     description:
       "A digital time capsule app where users create capsules of memories, messages, and photos — scheduled to unlock at a specific future date. Features AI-generated content via GPT-4 and a Node.js cron backend for precise scheduled notifications.",
     highlight: "Node.js cron job + Firebase Admin SDK for reliable future-date notification delivery that Firebase alone can't handle.",
-    links: { playStore: "", appStore: "", github: "", live: "" },
+    links: { playStore: "", appStore: "", github: "https://github.com/MukundVarsani/future-capsule", live: "" },
   },
   {
     name: "Real-Time Chat App",
@@ -176,7 +199,7 @@ export const projects = [
     description:
       "A full-stack real-time chat application with two separate frontends — React for web, Flutter for mobile — both powered by the same Node.js WebSocket backend with MongoDB storage.",
     highlight: "Same backend serving two completely different clients simultaneously with server-side timestamp-based message ordering.",
-    links: { playStore: "", appStore: "", github: "", live: "" },
+    links: { playStore: "", appStore: "", github: "https://github.com/MukundVarsani/flutter_chat_app_using_node_js", live: "" },
   },
   {
     name: "Fiverr Clone",
@@ -188,7 +211,7 @@ export const projects = [
     description:
       "A Fiverr clone built with the MERN stack, replicating core marketplace features including user authentication with JWT refresh logic, service listings, and a dynamic responsive UI.",
     highlight: "Deep dive into JWT authentication — token expiry, refresh logic, and route guarding on both frontend and backend.",
-    links: { playStore: "", appStore: "", github: "", live: "" },
+    links: { playStore: "", appStore: "", github: "https://github.com/MukundVarsani/Fiverr-clone", live: "" },
   },
 ];
 

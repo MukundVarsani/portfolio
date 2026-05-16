@@ -116,6 +116,11 @@ function ProjectCard({ project, index }) {
               <ExternalLink size={12} /> App Store
             </a>
           )}
+          {project.links.apk && (
+            <a href={project.links.apk} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: '0.3rem 0.7rem', fontSize: '0.7rem', gap: '0.3rem' }}>
+              <ExternalLink size={12} /> APK
+            </a>
+          )}
         </div>
       </div>
     </motion.div>
