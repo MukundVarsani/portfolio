@@ -27,7 +27,7 @@ export const skills = [
   { category: "Languages", name: "C#", proficiency: "beginner", years: 1, level: 30 },
   // Frameworks
   { category: "Frameworks & Libraries", name: "Flutter", proficiency: "expert", years: 2, level: 95 },
-  { category: "Frameworks & Libraries", name: "BLoC / Cubit", proficiency: "expert", years: 2, level: 90 },
+  { category: "Frameworks & Libraries", name: "BLoC / Cubit", proficiency: "expert", years: 2, level: 95 },
   { category: "Frameworks & Libraries", name: "GetX", proficiency: "expert", years: 1, level: 85 },
   { category: "Frameworks & Libraries", name: "Node.js", proficiency: "intermediate", years: 2, level: 65 },
   { category: "Frameworks & Libraries", name: "React", proficiency: "intermediate", years: 1, level: 60 },
@@ -44,7 +44,7 @@ export const skills = [
   { category: "Platform Integrations", name: "In-App Purchases (iOS & Android)", proficiency: "intermediate", years: 1, level: 65 },
   { category: "Platform Integrations", name: "Passio SDK (AI Nutrition)", proficiency: "intermediate", years: 1, level: 60 },
   // Dev Tools
-  { category: "Dev Tools", name: "Git & GitHub", proficiency: "expert", years: 2, level: 90 },
+  { category: "Dev Tools", name: "Git & GitHub", proficiency: "expert", years: 2, level: 80 },
   { category: "Dev Tools", name: "Android Studio & VS Code", proficiency: "expert", years: 2, level: 90 },
 ];
 

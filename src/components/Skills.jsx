@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useRef } from 'react'
+import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { skills } from '../data/portfolio'
 
 const CATEGORIES = ['All', ...Array.from(new Set(skills.map(s => s.category)))]
@@ -17,11 +17,13 @@ const proficiencyLabel = {
 
 export default function Skills() {
   const [active, setActive] = useState('All')
+  const sectionRef = useRef(null)
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
 
   const filtered = active === 'All' ? skills : skills.filter(s => s.category === active)
 
   return (
-    <section id="skills" style={{ padding: '7rem 2rem', position: 'relative', background: 'var(--bg-2)' }}>
+    <section ref={sectionRef} id="skills" style={{ padding: '7rem 2rem', position: 'relative', background: 'var(--bg-2)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         {/* Label */}
         <motion.div
@@ -135,12 +137,11 @@ export default function Skills() {
                   <motion.div
                     className="skill-bar-fill"
                     initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.2 + i * 0.03, ease: [0.22, 1, 0.36, 1] }}
+                    animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+                    transition={{ duration: 0.8, delay: 0.3 + i * 0.04, ease: [0.22, 1, 0.36, 1] }}
                     style={{
                       width: `${skill.level}%`,
-                      background: `linear-gradient(90deg, ${proficiencyColor[skill.proficiency]}, ${skill.proficiency === 'expert' ? 'var(--accent-2)' : proficiencyColor[skill.proficiency]}aa)`,
+                      background: `linear-gradient(90deg, ${proficiencyColor[skill.proficiency]}, ${skill.proficiency === 'expert' ? '#4fc3f7' : `${proficiencyColor[skill.proficiency]}aa`})`,
                     }}
                   />
                 </div>
