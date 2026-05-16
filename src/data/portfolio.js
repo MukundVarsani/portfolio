@@ -132,7 +132,7 @@ export const projects = [
     highlight: "Optimized Cubit-based state management to update only changed list items — eliminating UI lag on real-time updates.",
     links: {
       playStore: "https://play.google.com/store/apps/details?id=com.binstellar.gomeds",
-      appStore: "https://apps.apple.com/us/app/gomeds-24-7/id6755947115",
+      appStore: "https://apps.apple.com/in/app/gomeds-24-7/id6755947115",
       github: "",
       live: "",
     },
