@@ -22,7 +22,7 @@ export default function About({ theme }) {
   return (
     <section
       id="about"
-      style={{ padding: '7rem 2rem', position: 'relative' }}
+      style={{ padding: 'clamp(4rem, 8vw, 7rem) clamp(1rem, 4vw, 2rem)', position: 'relative' }}
     >
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <motion.div

@@ -11,9 +11,9 @@ export const personalInfo = {
   linkedin: "",
   github: "",
   objective:
-    "Flutter developer with 2+ years of hands-on experience building cross-platform mobile applications, including production apps published on both the App Store and Google Play Store. I enjoy solving real-world problems through scalable architecture and clean code — driven by curiosity, whether building multi-role systems, integrating real-time communication, exploring AI automation, or finding creative solutions when traditional approaches fail.",
+    "I am a Flutter developer with 3+ years of hands-on experience building cross-platform mobile applications, including production apps published on both the App Store and Google Play Store. I enjoy solving real-world problems through scalable architecture and clean code. My journey has been driven by curiosity — whether it is building multi-role systems, integrating real-time communication, exploring AI automation, or finding creative solutions when traditional approaches fail. I am eager to work on impactful products where I can take ownership, continuously learn, and contribute to meaningful user experiences.",
   personality:
-    "Fast learner who enjoys going deep into problems. I take ownership of my work and enjoy building features end-to-end — from UI to backend integration. I think unconventionally — when something does not work the obvious way, I look for creative workarounds.",
+    "I am a fast learner who enjoys going deep into problems instead of just fixing them on the surface. I like understanding the root cause and building proper solutions. I take ownership of my work and enjoy building features end-to-end — from UI to backend integration. I am also comfortable stepping outside my domain when needed, like working with C# for native integrations or experimenting with AI tools like n8n. I tend to think unconventionally — when something does not work the obvious way, I look for creative workarounds.",
   availability: "Available for full-time roles",
   preferredRoles: ["Flutter Developer", "Mobile App Developer", "Full-Stack Developer"],
   openToRemote: true,
@@ -21,13 +21,13 @@ export const personalInfo = {
 
 export const skills = [
   // Languages
-  { category: "Languages", name: "Dart", proficiency: "expert", years: 2, level: 95 },
+  { category: "Languages", name: "Dart", proficiency: "expert", years: 3, level: 95 },
   { category: "Languages", name: "JavaScript", proficiency: "intermediate", years: 2, level: 70 },
   { category: "Languages", name: "Python", proficiency: "beginner", years: 1, level: 35 },
   { category: "Languages", name: "C#", proficiency: "beginner", years: 1, level: 30 },
   // Frameworks
-  { category: "Frameworks & Libraries", name: "Flutter", proficiency: "expert", years: 2, level: 95 },
-  { category: "Frameworks & Libraries", name: "BLoC / Cubit", proficiency: "expert", years: 2, level: 95 },
+  { category: "Frameworks & Libraries", name: "Flutter", proficiency: "expert", years: 3, level: 95 },
+  { category: "Frameworks & Libraries", name: "BLoC / Cubit", proficiency: "expert", years: 3, level: 95 },
   { category: "Frameworks & Libraries", name: "GetX", proficiency: "expert", years: 1, level: 85 },
   { category: "Frameworks & Libraries", name: "Node.js", proficiency: "intermediate", years: 2, level: 65 },
   { category: "Frameworks & Libraries", name: "React", proficiency: "intermediate", years: 1, level: 60 },
@@ -53,10 +53,10 @@ export const experience = [
     role: "Flutter Developer",
     company: "Binstellar Technologies",
     location: "Ahmedabad, Gujarat",
-    duration: "March 2025 – Present",
+    duration: "March 2024 – Present",
     type: "Full-Time",
     summary:
-      "After completing my internship, I transitioned into a full-time Flutter Developer role. This role required me to work on an already large and complex production codebase — integrating native health APIs, AI-powered SDKs, and in-app purchases for a live health application used by real users.",
+      "After completing my internship, I transitioned into a full-time Flutter Developer role. This role required me to work on large and complex production codebases — integrating native health APIs, AI-powered SDKs, in-app purchases, and Clean Architecture for live applications used by real users.",
     responsibilities: [
       "Integrated Android Health Connect and iOS HealthKit to track user health and activity data",
       "Integrated Passio SDK for AI-based food recognition and nutritional analysis",
@@ -70,7 +70,7 @@ export const experience = [
     role: "Flutter Developer Intern",
     company: "Binstellar Technologies",
     location: "Ahmedabad, Gujarat",
-    duration: "Sep 2023 – Feb 2025",
+    duration: "Sep 2023 – Feb 2024",
     type: "Internship",
     summary:
       "Transitioned from web development (HTML, CSS, Bootstrap) into Flutter mobile development. Built two production apps published on the App Store and Google Play Store. Mentored a junior developer on BLoC patterns during the Playscheme project.",
@@ -104,37 +104,19 @@ export const education = [
 
 export const projects = [
   {
-    name: "Child Engagement & Activity Management Platform",
-    shortName: "Playscheme",
+    name: "Klean Health — Grocery & Nutrition Management Platform",
+    shortName: "Klean Health",
     type: "professional",
     tag: "Published · App Store & Play Store",
-    tech: ["Flutter", "Firebase", "BLoC", "Dart"],
+    tech: ["Flutter", "Dart", "Firebase", "BLoC", "Clean Architecture", "Dependency Injection", "In-App Purchases"],
     platform: ["iOS", "Android"],
     description:
-      "A multi-role Flutter application for a playscheme organization with 5 different user types — each with a completely different interface, permissions, and data flow inside a single codebase.",
-    highlight: "5 distinct user roles in one codebase, with BLoC-based module separation and tablet-responsive layouts.",
+      "A health-focused grocery and nutrition management application designed to help users choose meals and automatically adjust recipe portions according to their individual nutritional targets without requiring manual calculations.",
+    highlight: "Structured with Clean Architecture separating presentation, domain, and data layers; implemented subscription flow across frontend and backend.",
     links: {
-      playStore: "https://play.google.com/store/apps/details?id=com.binstellar.dareplayscheme",
-      appStore: "https://apps.apple.com/gb/app/dare-play-scheme/id6751529234",
+      playStore: "https://play.google.com/store/apps/details?id=com.kleanhealth",
+      appStore: "https://apps.apple.com/us/app/klean-health/id6793066569",
       github: "",
-      live: "",
-    },
-  },
-  {
-    name: "Digital Pharmacy Platform",
-    shortName: "GoMeds",
-    type: "professional",
-    tag: "Published · App Store & Play Store",
-    tech: ["Flutter", "Dart", "Firebase", "Pusher", "Cubit"],
-    platform: ["iOS", "Android"],
-    description:
-      "A mobile app that allows users to compare medicine and lab test prices across multiple partnered pharmacies and labs, with real-time price updates via Pusher.",
-    highlight: "Optimized Cubit-based state management to update only changed list items — eliminating UI lag on real-time updates.",
-    links: {
-      playStore: "https://play.google.com/store/apps/details?id=com.binstellar.gomeds",
-      appStore: "https://apps.apple.com/in/app/gomeds-24-7/id6755947115",
-      github: "",
-      live: "",
     },
   },
   {
@@ -150,8 +132,58 @@ export const projects = [
     links: {
       playStore: "https://play.google.com/store/apps/details?id=com.vitacoach.ai",
       appStore: "https://apps.apple.com/gb/app/vitacoach-ai/id6756865892",
-      github: "",
       live: "",
+      github: "",
+    },
+  },
+  {
+    name: "IA Con Canas — AI Prompt Learning Platform",
+    shortName: "IA Con Canas",
+    type: "professional",
+    tag: "Published · App Store & Play Store",
+    tech: ["Flutter", "Dart", "Node.js", "PostgreSQL", "Dependency Injection"],
+    platform: ["iOS", "Android"],
+    description:
+      "A gamified AI learning application designed to teach prompt engineering through short practical lessons, exercises, streaks, XP, and league-style gamification to communicate effectively with generative AI.",
+    highlight: "Implemented Dependency Injection reducing memory usage by 5–10%; collaborated on Node.js & PostgreSQL backend API and database entity design.",
+    links: {
+      playStore: "https://play.google.com/store/apps/details?id=com.binstellar.iaconcanas",
+      appStore: "https://apps.apple.com/mx/app/ia-con-canas-aprende-prompts/id6754550873",
+      github: "",
+    },
+  },
+  {
+    name: "Child Engagement & Activity Management Platform",
+    shortName: "Playscheme",
+    type: "professional",
+    tag: "Published · App Store & Play Store",
+    tech: ["Flutter", "Firebase", "BLoC", "Dart"],
+    platform: ["iOS", "Android"],
+    description:
+      "A multi-role Flutter application for a playscheme organization with 5 different user types — each with a completely different interface, permissions, and data flow inside a single codebase.",
+    highlight: "5 distinct user roles in one codebase, with BLoC-based module separation and tablet-responsive layouts; mentored junior developer on BLoC patterns.",
+    links: {
+      playStore: "https://play.google.com/store/apps/details?id=com.binstellar.dareplayscheme",
+      appStore: "https://apps.apple.com/gb/app/dare-play-scheme/id6751529234",
+      live: "",
+      github: "",
+    },
+  },
+  {
+    name: "Digital Pharmacy Platform",
+    shortName: "GoMeds",
+    type: "professional",
+    tag: "Published · App Store & Play Store",
+    tech: ["Flutter", "Dart", "Firebase", "Pusher", "Cubit"],
+    platform: ["iOS", "Android"],
+    description:
+      "A mobile app that allows users to compare medicine and lab test prices across multiple partnered pharmacies and labs, with real-time price updates via Pusher.",
+    highlight: "Optimized Cubit-based state management to update only changed list items — eliminating UI lag on real-time updates.",
+    links: {
+      playStore: "https://play.google.com/store/apps/details?id=com.binstellar.gomeds",
+      appStore: "https://apps.apple.com/in/app/gomeds-24-7/id6755947115",
+      live: "",
+      github: "",
     },
   },
   {
@@ -159,13 +191,8 @@ export const projects = [
     shortName: "Android Haptic",
     type: "personal",
     tag: "Personal Project",
-    tech: [
-      "Flutter",
-      "Dart",
-      "Android Native APIs",
-      "Haptic Feedback"
-    ],
-    platform: ["Android", "iOS"],
+    tech: ["Flutter", "Dart", "Android Native APIs", "Haptic Feedback"],
+    platform: ["Android"],
     description:
       "A self-learning mobile application created to experiment with advanced haptic feedback patterns, vibration intensity, and tactile interactions using Flutter and native platform APIs.",
     highlight:
@@ -173,8 +200,9 @@ export const projects = [
     links: {
       apk: "https://drive.google.com/file/d/1MTxDQMZizXW24a6_jXzVi1DaqrNr2_iI/view?usp=sharing",
       appStore: "",
+      playStore: "",
+      live: "",
       github: "",
-      live: ""
     },
   },
   {
@@ -226,21 +254,33 @@ export const softSkills = [
 
 export const featureProjects = [
   {
+    name: "Native Windows Meeting Screen & Audio Recorder",
+    tech: ["C#", "Windows Native APIs", "Screen & Audio Capture"],
+    description:
+      "Built a lightweight standalone native Windows executable in C# to automatically capture screen and system audio when meetings start, working independently of meeting providers with minimal resource usage.",
+  },
+  {
+    name: "BeActive macOS PKG Deployment & Self-Healing System",
+    tech: ["macOS", "Electron", "PKG Installer", "LaunchAgents", "Shell Scripts"],
+    description:
+      "Packaged a desktop activity tracking application into a native macOS .pkg installer supporting Intel & Apple Silicon, with LaunchAgents and system-level scripts for auto-startup, crash recovery, and update management.",
+  },
+  {
     name: "Browser URL Extraction via Native DLL",
     tech: ["Node.js", "C#", "Windows DLL"],
     description:
       "Built a native Windows DLL in C# to extract active browser URLs in real-time and bridged it into a Node.js desktop application using native bindings — solving a problem that pure JavaScript couldn't handle.",
   },
   {
-    name: "Brick Image Similarity Search (POC)",
-    tech: ["LLM Vision API", "Pinecone", "Node.js", "Vector Embeddings"],
-    description:
-      "Designed a visual similarity search for brick images using LLM-generated text descriptions and Pinecone vector search — no custom ML model, no large dataset required. Worked with just 10–15 reference images.",
-  },
-  {
     name: "Auto Restart Tracker via Windows Scheduler",
     tech: ["Node.js", "Windows Task Scheduler", "VBScript"],
     description:
       "Built a self-healing mechanism using VBScript + Windows Task Scheduler that automatically restarts a desktop tracking app whenever a user kills it via Task Manager.",
+  },
+  {
+    name: "Brick Image Similarity Search (POC)",
+    tech: ["LLM Vision API", "Pinecone", "Node.js", "Vector Embeddings"],
+    description:
+      "Designed a visual similarity search for brick images using LLM-generated text descriptions and Pinecone vector search — no custom ML model, no large dataset required. Worked with just 10–15 reference images.",
   },
 ];

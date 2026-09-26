@@ -46,7 +46,7 @@ export default function Navbar({ theme, toggleTheme }) {
           transition: 'all 0.3s ease',
         }}
       >
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(1rem, 4vw, 2rem)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           {/* Logo */}
           <a
             href="#hero"

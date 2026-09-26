@@ -23,7 +23,7 @@ export default function Skills() {
   const filtered = active === 'All' ? skills : skills.filter(s => s.category === active)
 
   return (
-    <section ref={sectionRef} id="skills" style={{ padding: '7rem 2rem', position: 'relative', background: 'var(--bg-2)' }}>
+    <section ref={sectionRef} id="skills" style={{ padding: 'clamp(4rem, 8vw, 7rem) clamp(1rem, 4vw, 2rem)', position: 'relative', background: 'var(--bg-2)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         {/* Label */}
         <motion.div
@@ -96,7 +96,7 @@ export default function Skills() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.3 }}
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1rem' }}
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '1rem' }}
           >
             {filtered.map((skill, i) => (
               <motion.div

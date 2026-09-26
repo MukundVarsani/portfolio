@@ -199,6 +199,23 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; letter-spacing: -0.02em; }
   box-shadow: 0 0 12px var(--accent);
 }
 
+/* ── Timeline Meta ─────────────────────────────────────── */
+.timeline-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+}
+
+@media (max-width: 640px) {
+  .timeline-meta {
+    align-items: flex-start !important;
+    width: 100%;
+    margin-top: 0.25rem;
+    gap: 0.35rem;
+  }
+}
+
 /* ── Nav link ──────────────────────────────────────────── */
 .nav-link {
   position: relative;
@@ -237,6 +254,8 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; letter-spacing: -0.02em; }
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
   text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .btn-primary:hover {
   transform: translateY(-2px);
@@ -257,6 +276,8 @@ h1, h2, h3, h4 { font-family: 'Syne', sans-serif; letter-spacing: -0.02em; }
   cursor: pointer;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
   text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .btn-outline:hover {
   transform: translateY(-2px);

@@ -17,7 +17,14 @@ function ProjectCard({ project, index }) {
   return (
     <motion.div
       className="glass"
-      style={{ borderRadius: 18, padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '1rem', height: '100%' }}
+      style={{
+        borderRadius: 18,
+        padding: 'clamp(1.2rem, 3.5vw, 1.75rem)',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        height: '100%',
+      }}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
@@ -88,37 +95,52 @@ function ProjectCard({ project, index }) {
       </div>
 
       {/* Platform + Links */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border)', paddingTop: '1rem' }}>
-        <div style={{ display: 'flex', gap: '0.35rem' }}>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '0.75rem',
+        borderTop: '1px solid var(--border)',
+        paddingTop: '1rem',
+        marginTop: 'auto',
+      }}>
+        <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', alignItems: 'center' }}>
           {project.platform.map(p => (
             <span key={p} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.7rem', color: 'var(--text-faint)' }}>
               {p === 'Web' ? <Globe size={11} /> : <Smartphone size={11} />} {p}
             </span>
           ))}
         </div>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', alignItems: 'center' }}>
           {project.links.github && (
             <a href={project.links.github} target="_blank" rel="noreferrer"
-              style={{ color: 'var(--text-muted)', transition: 'color 0.2s' }}
+              style={{ color: 'var(--text-muted)', transition: 'color 0.2s', display: 'inline-flex', alignItems: 'center', padding: '0.2rem' }}
               onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'}
               onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+              aria-label="GitHub Repository"
             >
               <Github size={16} />
             </a>
           )}
           {project.links.playStore && (
-            <a href={project.links.playStore} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: '0.3rem 0.7rem', fontSize: '0.7rem', gap: '0.3rem' }}>
+            <a href={project.links.playStore} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: '0.35rem 0.65rem', fontSize: '0.72rem', gap: '0.3rem', whiteSpace: 'nowrap', flexShrink: 0 }}>
               <ExternalLink size={12} /> Play Store
             </a>
           )}
           {project.links.appStore && (
-            <a href={project.links.appStore} target="_blank" rel="noreferrer" className="btn-outline" style={{ padding: '0.3rem 0.7rem', fontSize: '0.7rem', gap: '0.3rem' }}>
+            <a href={project.links.appStore} target="_blank" rel="noreferrer" className="btn-outline" style={{ padding: '0.35rem 0.65rem', fontSize: '0.72rem', gap: '0.3rem', whiteSpace: 'nowrap', flexShrink: 0 }}>
               <ExternalLink size={12} /> App Store
             </a>
           )}
           {project.links.apk && (
-            <a href={project.links.apk} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: '0.3rem 0.7rem', fontSize: '0.7rem', gap: '0.3rem' }}>
+            <a href={project.links.apk} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: '0.35rem 0.65rem', fontSize: '0.72rem', gap: '0.3rem', whiteSpace: 'nowrap', flexShrink: 0 }}>
               <ExternalLink size={12} /> APK
+            </a>
+          )}
+          {project.links.live && (
+            <a href={project.links.live} target="_blank" rel="noreferrer" className="btn-outline" style={{ padding: '0.35rem 0.65rem', fontSize: '0.72rem', gap: '0.3rem', whiteSpace: 'nowrap', flexShrink: 0 }}>
+              <Globe size={12} /> Website
             </a>
           )}
         </div>
@@ -135,7 +157,7 @@ export default function Projects() {
     : projects.filter(p => p.type === filter.toLowerCase())
 
   return (
-    <section id="projects" style={{ padding: '7rem 2rem', position: 'relative' }}>
+    <section id="projects" style={{ padding: 'clamp(4rem, 8vw, 7rem) clamp(1rem, 4vw, 2rem)', position: 'relative' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         {/* Label */}
         <motion.div
@@ -204,7 +226,7 @@ export default function Projects() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.5rem', marginBottom: '5rem' }}
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))', gap: '1.5rem', marginBottom: '5rem' }}
           >
             {filtered.map((project, i) => (
               <ProjectCard key={project.name} project={project} index={i} />
@@ -228,7 +250,7 @@ export default function Projects() {
           }}>
             Problem-solving highlights
           </h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.25rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '1.25rem' }}>
             {featureProjects.map((fp, i) => (
               <motion.div
                 key={fp.name}

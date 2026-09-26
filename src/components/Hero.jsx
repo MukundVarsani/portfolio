@@ -19,7 +19,7 @@ export default function Hero() {
         flexDirection: 'column',
         justifyContent: 'center',
         overflow: 'hidden',
-        padding: '0 2rem',
+        padding: '0 clamp(1rem, 4vw, 2rem)',
       }}
     >
       {/* Background blobs */}
@@ -35,20 +35,42 @@ export default function Hero() {
       }} />
 
       <div style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', width: '100%', paddingTop: '6rem' }}>
-        {/* Location badge */}
-        <motion.div {...fadeUp(0.1)} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '1.75rem' }}>
+        {/* Location & Status badge */}
+        <motion.div
+          {...fadeUp(0.1)}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '0.65rem 1rem',
+            marginBottom: '1.75rem',
+          }}
+        >
           <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-            padding: '0.3rem 0.8rem', borderRadius: '99px',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.45rem',
+            padding: '0.35rem 0.85rem',
+            borderRadius: '99px',
             border: '1px solid var(--border)',
             background: 'var(--surface)',
-            fontSize: '0.75rem', color: 'var(--text-muted)',
+            fontSize: '0.75rem',
+            color: 'var(--text-muted)',
+            whiteSpace: 'nowrap',
+            flexShrink: 0,
           }}>
-            <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#4ade80', boxShadow: '0 0 8px #4ade80' }} />
+            <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#4ade80', boxShadow: '0 0 8px #4ade80', flexShrink: 0 }} />
             Available for full-time roles
           </div>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-faint)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-            <MapPin size={12} /> {personalInfo.location}
+          <span style={{
+            fontSize: '0.75rem',
+            color: 'var(--text-faint)',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.35rem',
+            whiteSpace: 'nowrap',
+          }}>
+            <MapPin size={13} style={{ flexShrink: 0, color: 'var(--accent)' }} /> {personalInfo.location}
           </span>
         </motion.div>
 
@@ -74,16 +96,19 @@ export default function Hero() {
         {/* Title */}
         <motion.div {...fadeUp(0.3)} style={{ marginBottom: '1.5rem' }}>
           <span style={{
-            display: 'inline-block',
+            display: 'inline-flex',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '0.35rem 0.5rem',
             fontFamily: 'Syne, sans-serif',
             fontWeight: 600,
             fontSize: 'clamp(1rem, 2.5vw, 1.35rem)',
             color: 'var(--text-muted)',
             letterSpacing: '0.01em',
           }}>
-            {personalInfo.title}
-            <span style={{ color: 'var(--accent)', marginLeft: '0.5rem' }}>✦</span>
-            <span style={{ marginLeft: '0.5rem' }}>Cross-Platform Mobile Apps</span>
+            <span>{personalInfo.title}</span>
+            <span style={{ color: 'var(--accent)' }}>✦</span>
+            <span>Cross-Platform Mobile Apps</span>
           </span>
         </motion.div>
 
@@ -118,9 +143,9 @@ export default function Hero() {
           style={{ display: 'flex', flexWrap: 'wrap', gap: '2.5rem' }}
         >
           {[
-            { value: '2+', label: 'Years Experience' },
-            { value: '3', label: 'Production Apps Published' },
-            { value: '6+', label: 'Projects Shipped' },
+            { value: '3+', label: 'Years Experience' },
+            { value: '5', label: 'Production Apps Published' },
+            { value: '9+', label: 'Projects Shipped' },
           ].map(stat => (
             <div key={stat.label}>
               <div style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: '2rem', color: 'var(--text)', lineHeight: 1 }}>

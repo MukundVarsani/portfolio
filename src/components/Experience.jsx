@@ -9,7 +9,7 @@ function TimelineItem({ item, index, isExperience }) {
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.6, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
-      style={{ position: 'relative', paddingLeft: '2.25rem', paddingBottom: index < (isExperience ? experience.length - 1 : education.length - 1) ? '2.5rem' : 0 }}
+      style={{ position: 'relative', paddingLeft: 'clamp(1.5rem, 4vw, 2.25rem)', paddingBottom: index < (isExperience ? experience.length - 1 : education.length - 1) ? '2.5rem' : 0 }}
     >
       {/* Line */}
       {index < (isExperience ? experience.length - 1 : education.length - 1) && (
@@ -29,9 +29,9 @@ function TimelineItem({ item, index, isExperience }) {
         border: '2px solid var(--bg)',
       }} />
 
-      <div className="glass" style={{ borderRadius: 16, padding: '1.5rem 1.75rem' }}>
+      <div className="glass" style={{ borderRadius: 16, padding: 'clamp(1.1rem, 3.5vw, 1.75rem)' }}>
         {/* Header */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.5rem', marginBottom: '0.75rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.6rem', marginBottom: '0.75rem' }}>
           <div>
             <div style={{ fontFamily: 'Syne, sans-serif', fontWeight: 800, fontSize: '1.05rem', color: 'var(--text)', marginBottom: '0.2rem' }}>
               {isExperience ? item.role : item.degree}
@@ -40,7 +40,7 @@ function TimelineItem({ item, index, isExperience }) {
               {isExperience ? item.company : item.institution}
             </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.3rem' }}>
+          <div className="timeline-meta">
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
               <Calendar size={11} /> {item.duration}
             </div>
@@ -55,6 +55,8 @@ function TimelineItem({ item, index, isExperience }) {
                 background: item.type === 'Full-Time' ? '#4ade8020' : '#7c6af720',
                 color: item.type === 'Full-Time' ? '#4ade80' : '#7c6af7',
                 border: `1px solid ${item.type === 'Full-Time' ? '#4ade8050' : '#7c6af750'}`,
+                display: 'inline-block',
+                marginTop: '0.15rem',
               }}>
                 {item.type}
               </span>
@@ -67,6 +69,8 @@ function TimelineItem({ item, index, isExperience }) {
                 background: 'var(--glow)',
                 color: 'var(--accent)',
                 border: '1px solid var(--border)',
+                display: 'inline-block',
+                marginTop: '0.15rem',
               }}>
                 {item.score}
               </span>
@@ -98,7 +102,7 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      style={{ padding: '7rem 2rem', background: 'var(--bg-2)', position: 'relative' }}
+      style={{ padding: 'clamp(4rem, 8vw, 7rem) clamp(1rem, 4vw, 2rem)', background: 'var(--bg-2)', position: 'relative' }}
     >
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <motion.div
@@ -126,7 +130,7 @@ export default function Experience() {
           My journey so far
         </motion.h2>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '4rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: 'clamp(2.5rem, 5vw, 4rem)' }}>
           {/* Experience */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '2rem' }}>

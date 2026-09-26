@@ -1,28 +1,120 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, CheckCircle, ExternalLink, RotateCcw } from 'lucide-react'
 import { personalInfo } from '../data/portfolio'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState({ type: null, message: '', mailtoUrl: '' })
   const [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
+  const triggerMailtoFallback = (formData) => {
+    const subject = encodeURIComponent(`Portfolio Enquiry from ${formData.name.trim() || 'Visitor'}`)
+    const body = encodeURIComponent(
+      `Hello Mukund,\n\n${formData.message.trim()}\n\n---\nSender Name: ${formData.name.trim()}\nSender Email: ${formData.email.trim()}`
+    )
+    const mailtoUrl = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`
+
+    // Attempt to open email client directly
+    window.location.href = mailtoUrl
+    return mailtoUrl
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-    // Simulate async send
-    await new Promise(r => setTimeout(r, 1200))
+
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+    const autoReplyTemplateId = import.meta.env.VITE_AUTO_REPLY_EMAILJS_TEMPLATE_ID
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
+    // If EmailJS env credentials are configured, try sending via EmailJS REST API
+    if (serviceId && templateId && publicKey) {
+      try {
+        // 1. Send notification email to Mukund
+        const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            service_id: serviceId,
+            template_id: templateId,
+            user_id: publicKey,
+            template_params: {
+              name: form.name,
+              from_name: form.name,
+              email: form.email,
+              from_email: form.email,
+              reply_to: form.email,
+              message: form.message,
+              to_name: personalInfo.fullName,
+              to_email: personalInfo.email,
+            },
+          }),
+        })
+
+        if (response.ok) {
+          // 2. Send auto-reply thank-you email to the visitor
+          if (autoReplyTemplateId) {
+            fetch('https://api.emailjs.com/api/v1.0/email/send', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                service_id: serviceId,
+                template_id: autoReplyTemplateId,
+                user_id: publicKey,
+                template_params: {
+                  name: form.name,
+                  to_name: form.name,
+                  to_email: form.email,
+                  user_email: form.email,
+                  email: form.email,
+                  from_name: personalInfo.fullName,
+                  reply_to: personalInfo.email,
+                  message: form.message,
+                },
+              }),
+            }).catch(err => console.warn('Auto-reply email failed:', err))
+          }
+
+          setLoading(false)
+          setStatus({
+            type: 'emailjs',
+            message: "Thanks for reaching out! Your message was delivered successfully and a confirmation has been sent to your email. I'll get back to you shortly.",
+            mailtoUrl: '',
+          })
+          setForm({ name: '', email: '', message: '' })
+          return
+        } else {
+          const errText = await response.text()
+          console.warn('EmailJS returned non-200 status:', errText)
+        }
+      } catch (err) {
+        console.warn('EmailJS network request failed:', err)
+      }
+    }
+
+    // Fallback: Trigger pre-filled mailto
+    const mailtoUrl = triggerMailtoFallback(form)
     setLoading(false)
-    setSubmitted(true)
+    setStatus({
+      type: 'mailto',
+      message: `Your enquiry has been prepared. Your email client should open automatically with your message addressed to ${personalInfo.email}.`,
+      mailtoUrl,
+    })
+  }
+
+  const handleReset = () => {
+    setStatus({ type: null, message: '', mailtoUrl: '' })
+    setForm({ name: '', email: '', message: '' })
   }
 
   return (
-    <section id="contact" style={{ padding: '7rem 2rem', position: 'relative', overflow: 'hidden' }}>
+    <section id="contact" style={{ padding: 'clamp(4rem, 8vw, 7rem) clamp(1rem, 4vw, 2rem)', position: 'relative', overflow: 'hidden' }}>
       {/* Background blobs */}
       <div className="glow-blob" style={{ width: 400, height: 400, background: 'var(--accent)', bottom: '-10%', right: '-10%', opacity: 0.2 }} />
 
@@ -140,22 +232,50 @@ export default function Contact() {
             className="glass"
             style={{ borderRadius: 18, padding: '2rem' }}
           >
-            {submitted ? (
-              <div style={{ textAlign: 'center', padding: '2rem 0' }}>
+            {status.type ? (
+              <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: 'spring', stiffness: 200 }}
-                  style={{ color: '#4ade80', marginBottom: '1rem' }}
+                  style={{ color: status.type === 'emailjs' ? '#4ade80' : 'var(--accent)', marginBottom: '1rem' }}
                 >
-                  <CheckCircle size={48} strokeWidth={1.5} style={{ margin: '0 auto' }} />
+                  {status.type === 'emailjs' ? (
+                    <CheckCircle size={48} strokeWidth={1.5} style={{ margin: '0 auto' }} />
+                  ) : (
+                    <Mail size={48} strokeWidth={1.5} style={{ margin: '0 auto' }} />
+                  )}
                 </motion.div>
-                <h3 style={{ fontFamily: 'Syne, sans-serif', fontWeight: 700, color: 'var(--text)', margin: 0, marginBottom: '0.5rem' }}>
-                  Message sent!
+                <h3 style={{ fontFamily: 'Syne, sans-serif', fontWeight: 700, color: 'var(--text)', margin: 0, marginBottom: '0.75rem', fontSize: '1.25rem' }}>
+                  {status.type === 'emailjs' ? 'Message Sent!' : 'Enquiry Prepared'}
                 </h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', margin: 0 }}>
-                  I'll get back to you as soon as possible.
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', margin: 0, marginBottom: '1.5rem', lineHeight: 1.6 }}>
+                  {status.message}
                 </p>
+
+                {status.type === 'mailto' && status.mailtoUrl && (
+                  <div style={{ marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', alignItems: 'center' }}>
+                    <p style={{ fontSize: '0.78rem', color: 'var(--text-faint)', margin: 0 }}>
+                      Didn't open automatically?
+                    </p>
+                    <a
+                      href={status.mailtoUrl}
+                      className="btn-primary"
+                      style={{ fontSize: '0.85rem', padding: '0.5rem 1.25rem', gap: '0.5rem' }}
+                    >
+                      <ExternalLink size={14} /> Open in Email App
+                    </a>
+                  </div>
+                )}
+
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  className="btn-outline"
+                  style={{ fontSize: '0.8rem', padding: '0.45rem 1rem', margin: '0 auto', gap: '0.4rem', cursor: 'pointer' }}
+                >
+                  <RotateCcw size={13} /> Send another message
+                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
